@@ -87,7 +87,7 @@ contract Voting is Ownable {
         previousSessionStatus = currentSessionStatus;
         currentSessionStatus = WorkflowStatus.VotingSessionEnded;
         emit WorkflowStatusChange(previousSessionStatus, currentSessionStatus);
-        confirmation = "The voting session is now opened";
+        confirmation = "The voting session is now closed";
     }
 
     function tallyVotes() public {

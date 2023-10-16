@@ -49,8 +49,8 @@ contract Voting is Ownable {
     event ProposalRegistered(uint proposalId);
     event Voted (address voter, uint proposalId);
 
-    modifier check() {
-        require(voters[msg.sender].isRegistered != true, "Unauthorized");
+    modifier checkVoter(address addressToAdd) {
+        require(voters[addressToAdd].isRegistered != true, string.concat("Voter ", Strings.toHexString(addressToAdd), " is already registered"));
         _;
     }
 
@@ -87,7 +87,7 @@ contract Voting is Ownable {
         previousSessionStatus = currentSessionStatus;
         currentSessionStatus = WorkflowStatus.VotingSessionEnded;
         emit WorkflowStatusChange(previousSessionStatus, currentSessionStatus);
-        confirmation = "The voting session is now opened";
+        confirmation = "The voting session is now closed";
     }
 
     function tallyVotes() public {
@@ -97,7 +97,7 @@ contract Voting is Ownable {
     }
 
 
-    function registerVoter(address voterToAdd) public check returns (string memory confirmation) {
+    function registerVoter(address voterToAdd) public checkVoter(voterToAdd) returns (string memory confirmation) {
         require(msg.sender == contractOwner, "Only the contract's owner can add voter");
         voters[voterToAdd].isRegistered = true;
         voters[voterToAdd].hasVoted = false;
@@ -105,11 +105,10 @@ contract Voting is Ownable {
         confirmation = "Voter added";
     } 
 
-    function registerVoters(address[] calldata votersToAdd) public check returns (string memory confirmation) {
+    function registerVoters(address[] calldata votersToAdd) public returns (string memory confirmation) {
         require(msg.sender == contractOwner, "Only the contract's owner can add voters");
         for (uint i = 0; i < votersToAdd.length; i++) {
-            voters[votersToAdd[i]].isRegistered = true;
-            voters[votersToAdd[i]].hasVoted = false;
+            registerVoter(votersToAdd[i]);
             emit VoterRegistered(votersToAdd[i]);
         }
         confirmation = "Voters registered";
@@ -128,8 +127,8 @@ contract Voting is Ownable {
     }
 
     function submitProposal(string calldata descritpion) public returns (string memory confirmation) {
-        require(proposalRegistrationSessionIsOpened, "The session for submitting proposals is not open.");
-        require(voters[msg.sender].isRegistered, "You are not allowed to submit proposals.");
+        require(proposalRegistrationSessionIsOpened, "The session for submitting proposals is not opened.");
+        require(voters[msg.sender].isRegistered == true, "You are not allowed to submit proposals.");
         Proposal memory proposal = Proposal(msg.sender, descritpion, 0);
         proposals.push(proposal);
         emit ProposalRegistered(proposals.length-1);
@@ -162,6 +161,7 @@ contract Voting is Ownable {
 }
 
     function getWinner() public returns (address winnerID) {
+        require(msg.sender == contractOwner, "Only the contract's owner can count the votes and announce the winner.");
         winnerID = proposals[winningProposal()].hasBeenSubmittedBy;
         tallyVotes();
     }
