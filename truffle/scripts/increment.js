@@ -5,19 +5,19 @@
   https://trufflesuite.com/docs/truffle/getting-started/writing-external-scripts
 */
 
-const Voting = artifacts.require("Voting");
+const SimpleStorage = artifacts.require("SimpleStorage");
 
 module.exports = async function (callback) {
-  const deployed = await Voting.deployed();
+  const deployed = await SimpleStorage.deployed();
 
   const currentValue = (await deployed.read()).toNumber();
-  console.log(`Current Voting value: ${currentValue}`);
+  console.log(`Current SimpleStorage value: ${currentValue}`);
 
   const { tx } = await deployed.write(currentValue + 1);
   console.log(`Confirmed transaction ${tx}`);
 
   const updatedValue = (await deployed.read()).toNumber();
-  console.log(`Updated Voting value: ${updatedValue}`);
+  console.log(`Updated SimpleStorage value: ${updatedValue}`);
 
   callback();
 };
