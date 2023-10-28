@@ -37,11 +37,40 @@ Fonctionnalités additionnelles (il s'agit surtout d'ajouts permettant au/à la 
 
 Vous pouvez maintenant tester les différentes fonctionnalités du smart-contract `Voting`.  
 
+### **Déroulé d'une utilisation du contract** :
+
+- Ouvrir une nouvelle session : `openNewSession`   
+  Toutes les fonctionnalités seront bloquées tant qu'une nouvelle session ne sera pas ouverte.  
+- Ouvrir l'enregistrement de `Voter` : `openVotersRegistration`  
+- Inscrire des `Voters`  
+  - Un par un avec : `registerVoter` (param : `address`)  
+  - Plusieurs : `registerVoters` (param : `address[]`)    
+    Il est possible de supprimer à tout moment un.e ou plusieurs    `Voters` en utilisant `removeVoter` et `removeVoters` qui prennent respectivement en paramètres : `address` et `address[]`  
+- Fermer l'enregistrement de `Voter` : `closeVotersRegistration`  
+- Ouvrir l'enregistrement de propositions : `openProposalRegistration`  
+- Soumettre une proposition : `submitProposal` (param : `string`)  
+- Fermer l'enregistrement de propositions : `closeProposalRegistration`  
+- Ouvrir la session de vote : `openVotingSession`  
+- Session de vote : 
+  - Visualiser les propositions soumises : `displayProposals`
+  - Voter : `vote` (param : `uint256`)  
+    /!\ Il n'est possible de voter qu'une seule fois /!\
+  - Consulter le vote d'un.e autre `Voter` : `consultVote` (param : `address`)  
+- Fermer la session de vote : `closeVotingSession`  
+- Comptabiliser les voix : `tallyVotes`  
+- Afficher le.a gagnant.e : `getWinner`  
+- Afficher la proposition gagnant : `getWinningProposal`  
+- Fermer la session : `closeGlobalSession`
+
+
+En cas de besoin, il est possible de réinitialiser l'intégralité de la session avec `resetGlobalSession` qui prend en paramètre une chaîne de caractère correspondante à un message d'information concernant la/les raison(s) de la réinitialisation.  
+Il est également possible de seulement réinitialiser la session de vote avec `resetVotingSession` qui vide la liste des propositions et réinitialise le vote de tous les `Voter`.
+
 
 ## **Informations**  
 
 Une grande partie des fonctions renvoient une string en sortie.  
-Cela est volontaire étant donné que mon projet ne possède pas de front. J'ai choisi de procéder ainsi afin de pouvoir profiter d'un suivi dans les différentes actions réalisées lors d'une utilisation du contract. 
+Cela est volontaire étant donné que mon projet ne **possède** pas de front. J'ai choisi de procéder ainsi afin de pouvoir profiter d'un suivi dans les différentes actions réalisées lors d'une utilisation du contract. 
 Les différents messages de suivi sont visibles dans les output de chaque transaction. 
 
 ---
