@@ -2,9 +2,13 @@ Smart contract project.
 
 Mettre en place un smart contract permettant des sessions de vote.
 
-- [Vidéo de démonstration des fonctionnalités du Smart contract ```Voting``` (backend)](https://youtu.be/K4Hp8hRbvzg)  
+Fonctionnalités additionnelles (il s'agit surtout d'ajouts permettant au/à la contractOwner de pouvoir avoir plus de contrôle sur le contract qu'il/elle/iel déploie):
+    - Possibilité d'ajouter un.e voter
+    - Possibilité de reset une session dans sa globalité (cas ex: suspicion de triche, session non réglementaire, ...)
+    - Possibilité de reset à la phase de soumission des propositions (cas ex: suspicion de triche)
+    - Possibilité de remove un.e voter
+    - Possibilité de remove des voters
 
-- / pas de lien vers un déploiement public disponible /  
 
 DA COSTA VEIGA
 Adrien
