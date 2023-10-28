@@ -6,16 +6,20 @@ Objectif : Mettre en place un smart contract permettant des sessions de vote.
 
 Fonctionnalités additionnelles (il s'agit surtout d'ajouts permettant au/à la contractOwner de pouvoir avoir plus de contrôle sur le contract qu'il/elle/iel déploie) :  
 
-    - Possibilité d'ajouter un.e voter  
+    - Un.e Voter ne peut voter que pour une et une seule proposition
+    - Possibilité d'ajouter un.e Voter 1 par 1  
     - Possibilité de reset une session dans sa globalité (cas ex: suspicion de triche, session non réglementaire, ...)  
     - Possibilité de reset à la phase de soumission des propositions (cas ex: suspicion de triche)  
-    - Possibilité de remove un.e voter  
-    - Possibilité de remove des voters  
+    - Possibilité de remove un.e Voter de la liste des Voters
+    - Possibilité de remove plusieurs Voters de la liste des Voters
 
 **/!\ WARNING /!\\**  
 
 
-**UTILISATION DE L'IDE REMIX RECOMMANDÉE POUR TESTER LE BACKEND**  
+**UTILISATION DE L'IDE [REMIX]([REMIX](https://remix.ethereum.org/)) RECOMMANDÉE POUR TESTER LE BACKEND** 
+ 
+
+
 
 Une grande partie des fonctions renvoient une string en sortie.  
 Cela est volontaire étant donné que mon projet ne possède pas de front. J'ai choisi de procéder ainsi afin de pouvoir profiter d'un suivi dans les différentes actions réalisées lors d'une utilisation du contract.
