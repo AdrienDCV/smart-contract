@@ -197,9 +197,11 @@ contract Voting is Ownable {
     } 
 
     // Gives to contractOwner the possibility to remove a registered voter at anytime
-    function removeVoter(address voterToRemove) public returns (string memory confirmation) {
+      function removeVoter(address voterToRemove) public returns (string memory confirmation) {
         require(msg.sender == contractOwner, "Only the contract's owner can remove voter");
         require(globalSessionIsOpened == true && votersAddresses.length > 0, "The global session must be opened & the number of voters must be > 0 to remove a voter");
+        Voter storage voter = voters[voterToRemove];
+        proposals[voter.votedProposalId].voteCount-- ;
         delete voters[voterToRemove];
         emit VoterRemoved(voterToRemove);
         confirmation = "Voters removed";
