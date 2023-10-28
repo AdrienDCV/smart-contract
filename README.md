@@ -41,7 +41,8 @@ Vous pouvez maintenant tester les différentes fonctionnalités du smart-contrac
 ## **Informations**  
 
 Une grande partie des fonctions renvoient une string en sortie.  
-Cela est volontaire étant donné que mon projet ne possède pas de front. J'ai choisi de procéder ainsi afin de pouvoir profiter d'un suivi dans les différentes actions réalisées lors d'une utilisation du contract.  
+Cela est volontaire étant donné que mon projet ne possède pas de front. J'ai choisi de procéder ainsi afin de pouvoir profiter d'un suivi dans les différentes actions réalisées lors d'une utilisation du contract. 
+Les différents messages de suivi sont visibles dans les output de chaque transaction. 
 
 ---
 DA COSTA VEIGA  
